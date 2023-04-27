@@ -1,0 +1,23 @@
+<main>
+  <p>Please find the rss feed for the podcast. Usually you can google search "(podcast name) rss".</p>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <div class="material-textfield">
+    <input 
+        placeholder=" " 
+        type="text" 
+        ngModel 
+        name="podcastUrl" 
+        required>
+    <label>Podcast url</label>
+    <button class="btn"><span class="material-symbols-outlined">
+        search
+        </span></button>
+  </div>
+</form>
+  <section id="result" *ngIf="podcastUrl !=''">
+    <hr />
+
+    <span *ngIf="podcastTitle == '' && status == ''">Searching...</span>
+    <span *ngIf="status == 'error'">Podcast not found.</span>
+  </section>
+</main>

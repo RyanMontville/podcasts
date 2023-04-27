@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit{
 
   viewPodcast(title: string) {
     let str = title.replace(/\s+/g, '-').toLowerCase();
-    this.router.navigate([`/${str}`]);
+    this.router.navigate([`/podcast/${str}`]);
   }
 
 }
