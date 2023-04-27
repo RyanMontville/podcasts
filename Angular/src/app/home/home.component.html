@@ -1,5 +1,16 @@
-<button (click)="addPodcast()">Add Evan and Katelyn</button>
-{{podcasts.length}}
-<div *ngFor="let podcast of podcasts">
-    <a [href]="podcast.id">{{podcast.title}}</a>
-</div>
+<main>
+  <section id="subcription-header">
+    <h3>Subscriptions</h3>
+    <button class="btn" title="Add Podcast"><span class="material-symbols-outlined">
+        add_link
+      </span></button>
+  </section>
+  <section id="subcription-list">
+    <div *ngFor="let podcast of podcasts">
+        <a (click)="viewPodcast(podcast.title)" class="podcast-link"><img [src]="podcast.image" [alt]="podcast.title" class="logo"></a>
+        <!--<a (click)="viewPodcast(podcast.title)" class="podcast-link">{{podcast.title}}</a>-->
+      </div>
+  </section>
+  <hr />
+  <button (click)="addPodcast()">Add Dear Hank and John</button>
+</main>

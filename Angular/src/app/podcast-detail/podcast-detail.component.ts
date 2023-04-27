@@ -11,7 +11,7 @@ import { Link } from '../Link.model';
   styleUrls: ['./podcast-detail.component.css']
 })
 export class PodcastDetailComponent implements OnInit {
-  podcast: Link = {id: 0, url: '', title: '', color: ''};
+  podcast: Link = {url: '', title: '', color: '', image: ''};
   podcastId: number = 0;
   podcastImage: string = "";
   podcastTitle: string = "";
@@ -24,9 +24,9 @@ export class PodcastDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      let id: number = +params['id'];
-      this.podcast = this.podcastService.getPodcast(id);
-      alert(this.podcast.title);
+      let titlestr: string = params['id'];
+      let title: string = titlestr.replace(/-/g, ' ');
+      this.podcast = this.podcastService.getPodcast(title);
       this.getPodcast(this.podcast.url);
     })
     
@@ -44,7 +44,7 @@ export class PodcastDetailComponent implements OnInit {
 
   formatDate(date: string) {
     const dateType = new Date(date);
-    let formatDate = dateType.getMonth() + "/" + dateType.getDay() + "/" + dateType.getFullYear();
+    let formatDate = (dateType.getMonth()+1) + "/" + dateType.getDate() + "/" + dateType.getFullYear();
     return formatDate;
   }
 

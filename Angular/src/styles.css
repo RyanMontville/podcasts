@@ -10,3 +10,36 @@ body {
     font-family: 'Roboto Slab';
     background-color: #e5e5e5;
 }
+
+.red {
+    background-color: #ff0000;
+    color: #fff;
+}
+.orange {
+    background-color: #ff6f00;
+    color: #000;
+}
+.yellow {
+    background-color: yellow;
+    color: #000;
+}
+.green {
+    background-color: #2e712a;
+    color: #fff;
+}
+.blue {
+    background-color: #3137fd;
+    color: #fff;
+}
+.purple {
+    background-color: #651fff;
+    color: #fff;
+}
+.pink {
+    background-color: #f96995;
+    color: #000;
+}
+.black {
+    background-color: #000;
+    color: #fff;
+}
