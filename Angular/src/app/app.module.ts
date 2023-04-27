@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PodcastDetailComponent } from './podcast-detail/podcast-detail.component';
+import { PodcastService } from './podcast.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { PodcastDetailComponent } from './podcast-detail/podcast-detail.componen
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [PodcastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

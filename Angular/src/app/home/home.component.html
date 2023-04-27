@@ -1,0 +1,5 @@
+<button (click)="addPodcast()">Add Evan and Katelyn</button>
+{{podcasts.length}}
+<div *ngFor="let podcast of podcasts">
+    <a [href]="podcast.id">{{podcast.title}}</a>
+</div>
