@@ -10,6 +10,9 @@ import { PodcastService } from './podcast.service';
 import { AddPodcastComponent } from './add-podcast/add-podcast.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { UserService } from './user.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     PodcastDetailComponent,
     AddPodcastComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,7 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PodcastService],
+  providers: [PodcastService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

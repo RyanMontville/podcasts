@@ -1,4 +1,9 @@
 <nav>
     <a routerLink="/">Home</a>
-    <span>Welcome Ryan</span>
+    <span *ngIf="isLoggedIn==false">
+      <a (click)="login()">Login</a> | <a (click)="register()">Register</a>
+    </span>
+    <span *ngIf="isLoggedIn==true">Welcome {{user.username}} | <a (click)="logout()">Logout</a></span>
   </nav>
+  <app-login (hasLoggedIn)="handleLogin($event)" *ngIf="showLoginComponent" />
+  <app-register (hasRegister)="handleRegister($event)" *ngIf="showRegisterComponent" />

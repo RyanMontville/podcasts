@@ -11,7 +11,7 @@ import { Link } from '../Link.model';
   styleUrls: ['./podcast-detail.component.css']
 })
 export class PodcastDetailComponent implements OnInit {
-  podcast: Link = {url: '', title: '', color: '', image: ''};
+  podcast: Link = {podcastId: 0, url: '', title: '', color: '', image: ''};
   podcastId: number = 0;
   podcastImage: string = "";
   podcastTitle: string = "";

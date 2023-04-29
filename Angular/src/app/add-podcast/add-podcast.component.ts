@@ -29,7 +29,7 @@ export class AddPodcastComponent {
         this.podcastImage = data.feed.image;
         this.podcastTitle = data.feed.title;
         this.podcastHost = data.feed.author;
-        this.podcastService.addPodcast({url: podcast, title: data.feed.title, color: 'black', image: data.feed.image});
+        this.podcastService.addPodcast({podcastId: 0, url: podcast, title: data.feed.title, color: 'black', image: data.feed.image});
         //this.router.navigate(['/']);
       }
     }, error => {
