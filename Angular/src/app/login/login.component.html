@@ -1,3 +1,33 @@
-<p>login works!</p>
-<button (click)="login()">Login</button>
-{{errorMessage}}
+<div id="container">
+    <section id="login-container">
+        <a (click)="close()"><span class="material-symbols-outlined close">
+            close
+            </span></a>
+        <h2>Login</h2>
+        <div class="alert alert-danger" *ngIf="errorMessage.length>0"><i class="material-symbols-outlined">error</i> {{errorMessage}}</div>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div class="panel-group">
+                <input 
+                    class="input" 
+                    type="text" 
+                    ngModel 
+                    name="username"
+                    required>
+                <span class="border"></span>
+                <label>Username</label>
+            </div>
+            <div class="panel-group">
+                <input 
+                    class="input" 
+                    type="text" 
+                    ngModel 
+                    name="password"
+                    required>
+                <span class="border"></span>
+                <label>Password</label>
+            </div>
+            <button class="btn" type="submit">Login</button>
+            </form>
+            <div class="register-link">Need an account? <a (click)="register()">Click here</a></div>
+        </section>
+</div>

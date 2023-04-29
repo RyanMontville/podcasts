@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,9 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Output() hasLoggedIn = new EventEmitter<boolean>();
+  @Output() hasLoggedIn = new EventEmitter<{login: boolean, register: boolean}>();
+  username: string = '';
+  password: string = '';
   isLoggedIn: boolean = false;
   errorMessage: string = '';
 
@@ -18,16 +21,25 @@ export class LoginComponent implements OnInit {
     });
     this.userService.isSignedIn.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
+      if(loggedIn) {
+        this.hasLoggedIn.emit({login: false, register: false});
+      }
     })
   }
 
-  login() {
-    this.userService.login('ryan');
-    if(this.isLoggedIn === true) {
-      this.hasLoggedIn.emit(false);
-    }
-    
-    
+  onSubmit(f: NgForm) {
+    this.username = f.value.username;
+    this.password = f.value.password;
+    this.errorMessage = '';
+    this.userService.login(f.value.username);
+  }
+
+  register() {
+    this.hasLoggedIn.emit({login: false, register: true});
+  }
+
+  close() {
+    this.hasLoggedIn.emit({login: false, register: false});
   }
 
 }

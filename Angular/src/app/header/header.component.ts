@@ -13,8 +13,7 @@ export class HeaderComponent implements OnInit {
   color: string = "";
   isLoggedIn: boolean = false;
   user: User = new User(0,'');
-  showLoginComponent: boolean = false;
-  showRegisterComponent: boolean = false;
+  showComponents: {login: boolean, register: boolean} = {login: false, register: false};
   @Input() set podcast(value: Link){
     this.backgroundColor = value.color;
   }
@@ -30,21 +29,19 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-    this.showLoginComponent = true;
-    this.showRegisterComponent = false;
+    this.showComponents = {login: true, register: false};
   }
 
-  handleLogin(login: boolean) {
-    this.showLoginComponent = login;
+  handleLogin(loginSent: {login: boolean, register: boolean}) {
+    this.showComponents = {login: loginSent.login, register: loginSent.register};
   }
 
   register() {
-    this.showLoginComponent = false;
-    this.showRegisterComponent = true;
+    this.showComponents = {login: false, register: true};
   }
 
-  handleRegister(register: boolean) {
-    this.showRegisterComponent = register;
+  handleRegister(registerSent: {login: boolean, register: boolean}) {
+    this.showComponents = {login: registerSent.login, register: registerSent.register};
   }
 
   logout() {

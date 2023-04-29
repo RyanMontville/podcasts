@@ -22,7 +22,7 @@ public class UserController {
     /*************************************** GETS **************************************/
     @RequestMapping(path = "/users/{username}", method = RequestMethod.GET)
     public User getUserByUsername(@PathVariable String username) {
-        User user = userDao.getUserByUsername(username);
+        User user = userDao.getUserByUsername(username.toLowerCase());
         if(user==null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.");
         } else {
@@ -32,12 +32,13 @@ public class UserController {
     /*************************************** POST **************************************/
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users", method = RequestMethod.POST)
-    public int newUser(@RequestBody String username) throws Exception {
+    public User newUser(@RequestBody String username) throws Exception {
         boolean isUsernameTaken = userDao.isUsernameTaken(username.toLowerCase());
         if(isUsernameTaken) {
-            throw new ResponseStatusException(HttpStatus.IM_USED, "Username already taken.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already taken.");
         } else {
-            return userDao.createUser(username.toLowerCase());
+            int userId = userDao.createUser(username.toLowerCase());
+            return userDao.getUserById(userId);
         }
     }
 

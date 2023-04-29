@@ -32,6 +32,16 @@ public class JdbcUserDao implements UserDao {
         }
         return user;
     }
+
+    public User getUserById(int userId) {
+        User user = null;
+        String sql = "SELECT user_id, username FROM public.users WHERE user_id = ?;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
+        if(result.next()) {
+            user = mapRowToUser(result);
+        }
+        return user;
+    }
     @Override
     public int createUser(String newUser) {
         String sql = "INSERT INTO public.users(username) " +

@@ -17,10 +17,19 @@ export class UserService {
             this.isSignedIn.next(true);
             this.errorMessage.next('');
         }, error => {
-            this.errorMessage.next(error.message);
-            return error.message;
+            this.errorMessage.next(error.error.message);
         });
-        return '';
+    }
+
+    register(username: string) {
+        this.http.post<User>('http://localhost:9000/users',username).subscribe(data => {
+            this.user.next(data);
+            this.isSignedIn.next(true);
+            this.errorMessage.next('');
+        }, error => {
+            //this.errorMessage.next(error.error.message);
+            this.errorMessage.next(error.error.message);
+        });
     }
 
     logout() {

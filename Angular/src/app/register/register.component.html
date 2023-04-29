@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div id="container">
+    <section id="register-container">
+        <a (click)="close()"><span class="material-symbols-outlined close">
+            close
+            </span></a>
+        <h2>Register</h2>
+        <div class="alert alert-danger" *ngIf="errorMessage.length>0"><i class="material-symbols-outlined">error</i> {{errorMessage}}</div>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div class="panel-group">
+                <input 
+                    class="input" 
+                    type="text" 
+                    ngModel 
+                    name="username"
+                    required>
+                <span class="border"></span>
+                <label>Username</label>
+            </div>
+            <div class="panel-group">
+                <input 
+                    class="input" 
+                    type="text" 
+                    ngModel 
+                    name="password"
+                    required>
+                <span class="border"></span>
+                <label>Password</label>
+            </div>
+            <button class="btn" type="submit">Register</button>
+            </form>
+            <div class="register-link">Already have an account? <a (click)="login()">Click here</a></div>
+        </section>
+</div>

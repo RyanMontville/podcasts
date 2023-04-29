@@ -1,0 +1,170 @@
+#container {
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#register-container {
+    width: 400px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    position: relative;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: 'Roboto';
+    font-size: 30px;
+}
+
+.register-link {
+    text-align: center;
+}
+
+.register-link a {
+    cursor: pointer;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+/************************* Alert Box *************************/
+.alert {
+    max-width: 350px;
+    margin: 5px auto 10px auto;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-success {
+    background-color: #91cf91;
+    border-color: #80c780;
+    color: #3d8b3d;
+}
+
+.alert-warning {
+    background-color: #ebc063;
+    border-color: #e8b64c;
+    color: #a07415;
+}
+
+.alert-danger {
+    background-color: #e27c79;
+    border-color: #dd6864;
+    color: black;
+}
+
+.alert p {
+    padding: 0;
+    margin: 0;
+}
+
+.alert i {
+    padding-right: 5px;
+    vertical-align: middle;
+    font-size: 24px;
+}
+
+/************************* Input Fields *************************/
+.panel-group {
+    margin-bottom: 35px;
+    margin-left: 40px;
+    position: relative;
+}
+
+.input {
+    border: 0;
+    border-bottom: 1px solid #212121;
+    display: block;
+    font-size: 1em;
+    padding: 10px 10px 10px 5px;
+    width: 300px;
+}
+
+.input:focus {
+    outline: 0;
+}
+
+label {
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    color: #999;
+    font-size: 14px;
+    font-weight: normal;
+    left: 5px;
+    pointer-events: none;
+    position: absolute;
+    top: 10px;
+}
+
+.input:focus~label,
+.input:valid~label {
+    color: #4fc3f7;
+    font-size: 0.75em;
+    font-weight: bold;
+    top: -15px;
+}
+
+.border {
+    display: block;
+    position: relative;
+    width: 315px;
+}
+
+.border::before,
+.border::after {
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    background: #03a9f4;
+    bottom: 1px;
+    content: '';
+    height: 2px;
+    position: absolute;
+    width: 0;
+}
+
+.border::before {
+    left: 50%;
+}
+
+.border::after {
+    right: 50%;
+}
+
+.input:focus~.border::before,
+.input:focus~.border::after {
+    width: 50%;
+}
+
+/**************************** Button ****************************/
+.btn {
+    background: rgb(66, 133, 244);
+    border: none;
+    color: white;
+    height: 5rem;
+    width: 10rem;
+    display: block;
+    margin: 10px auto;
+    font-size: 2rem;
+    cursor: pointer;
+}

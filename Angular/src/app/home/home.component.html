@@ -1,13 +1,15 @@
 <app-header />
 <main>
   <section id="subcription-header">
-    <h3>Subscriptions</h3>
+    <h3 *ngIf="!isLoggedIn">Podcasts users are listening to</h3>
+    <h3 *ngIf="isLoggedIn">Your Subscriptions</h3>
     <button 
     class="btn" 
     routerLink="/add"
-    title="Add Podcast"><span class="material-symbols-outlined">
-        add_link
-      </span></button>
+    title="Add Podcast" 
+    *ngIf="isLoggedIn">
+      <span class="material-symbols-outlined">add_link</span>
+    </button>
   </section>
   <section id="subcription-list">
     <div *ngFor="let podcast of podcasts">

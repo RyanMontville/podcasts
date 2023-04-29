@@ -5,5 +5,5 @@
     </span>
     <span *ngIf="isLoggedIn==true">Welcome {{user.username}} | <a (click)="logout()">Logout</a></span>
   </nav>
-  <app-login (hasLoggedIn)="handleLogin($event)" *ngIf="showLoginComponent" />
-  <app-register (hasRegister)="handleRegister($event)" *ngIf="showRegisterComponent" />
+  <app-login (hasLoggedIn)="handleLogin($event)" *ngIf="showComponents.login" />
+  <app-register (hasRegister)="handleRegister($event)" *ngIf="showComponents.register" />
