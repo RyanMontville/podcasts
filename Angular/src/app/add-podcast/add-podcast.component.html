@@ -1,3 +1,4 @@
+<app-header />
 <main>
   <p>Please find the rss feed for the podcast. Usually you can google search "(podcast name) rss".</p>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
@@ -20,4 +21,6 @@
     <span *ngIf="podcastTitle == '' && status == ''">Searching...</span>
     <span *ngIf="status == 'error'">Podcast not found.</span>
   </section>
+  {{podcastTitle}}
+  <br/>{{podcastImage}}
 </main>

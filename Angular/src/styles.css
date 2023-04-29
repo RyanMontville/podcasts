@@ -28,8 +28,13 @@ body {
     color: #fff;
 }
 .blue {
-    background-color: #3137fd;
+    background-image: linear-gradient(rgba(49,55,253,1), rgba(255,0,0,0));
+    
     color: #fff;
+}
+.blue-2 {
+    background-color: #3137fd;
+    color: white;
 }
 .purple {
     background-color: #651fff;

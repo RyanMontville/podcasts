@@ -21,7 +21,7 @@ export class AddPodcastComponent {
   constructor(private http: HttpClient, private podcastService: PodcastService, private router: Router) {}
 
   getPodcast(podcast: string) {
-    this.http.get<Podcast>(`https://api.rss2json.com/v1/api.json?rss_url=${podcast}`)
+    this.http.get<Podcast>(`https://api.rss2json.com/v1/api.json?rss_url=${podcast}&api_key=oknfgwjsm1rg6qymitppclwvg60z4ml7at0g1be1`)
     .subscribe(data => {
       if(data.status === 'error') {
         this.status = data.status;
@@ -30,7 +30,7 @@ export class AddPodcastComponent {
         this.podcastTitle = data.feed.title;
         this.podcastHost = data.feed.author;
         this.podcastService.addPodcast({url: podcast, title: data.feed.title, color: 'black', image: data.feed.image});
-        this.router.navigate(['/']);
+        //this.router.navigate(['/']);
       }
     }, error => {
       this.status = 'error';

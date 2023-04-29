@@ -38,3 +38,13 @@ main {
     border: 0;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 500px) {
+    #subcription-list {
+        justify-content: space-evenly;
+    }
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+}

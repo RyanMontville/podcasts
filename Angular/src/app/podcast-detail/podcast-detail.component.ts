@@ -27,12 +27,14 @@ export class PodcastDetailComponent implements OnInit {
       let titlestr: string = params['id'];
       let title: string = titlestr.replace(/-/g, ' ');
       this.podcast = this.podcastService.getPodcast(title);
+      this.podcastImage = this.podcast.image;
+      this.podcastTitle = this.podcast.title;
       this.getPodcast(this.podcast.url);
     })
     
   }
   getPodcast(podcast: string) {
-    this.http.get<Podcast>(`https://api.rss2json.com/v1/api.json?rss_url=${podcast}`).subscribe(data => {
+    this.http.get<Podcast>(`https://api.rss2json.com/v1/api.json?rss_url=${podcast}&api_key=oknfgwjsm1rg6qymitppclwvg60z4ml7at0g1be1`).subscribe(data => {
       this.podcastImage = data.feed.image;
       this.podcastHost = data.feed.author;
       this.podcastTitle = data.feed.title;

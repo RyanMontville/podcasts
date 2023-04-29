@@ -1,14 +1,16 @@
+<app-header [podcast]="podcast" />
 <section id="podcast-header">
     <section id="feed-info">
       <img [src]="podcastImage" [alt]="podcastTitle" *ngIf="podcastImage !==''" class="logo">
       <section id="author">
         <h2 [innerHTML]="podcastTitle"></h2>
         <h3><a [href]="hostLink" target="_blank" rel="noopener noreferrer"
-            title="{{podcastTitle}} website">{{podcastHost}}</a></h3>
+            title="{{podcastTitle}} website" [innerHTML]="podcastHost"></a></h3>
       </section>
     </section>
     <p [innerHTML]="description" id="description"></p>
   </section>
+  <article *ngIf="!hostLink">Loading...</article>
   <article *ngFor="let item of feedItems">
     <h4>{{item.title}}</h4>
     <h4>{{formatDate(item.pubDate)}}</h4>
@@ -16,3 +18,4 @@
     <audio controls>
       <source [src]="item.enclosure.link" type="audio/ogg"></audio>
   </article>
+  <article *ngIf="hostLink"><p>Find more episodes on <a [href]="hostLink" target="_blank" rel="noopener noreferrer">{{hostLink}}</a></p></article>
