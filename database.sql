@@ -8,8 +8,7 @@ CREATE TABLE podcasts
 	podcast_id serial NOT NULL,
 	podcast_url text NOT NULL,
 	podcast_title varchar(50) NOT NULL,
-	color varchar(20) NOT NULL,
-	image text NOT NULL,
+	podcast_image text NOT NULL,
 	CONSTRAINT pk_podcasts PRIMARY KEY (podcast_id)
 );
 
@@ -24,6 +23,7 @@ CREATE TABLE user_podcast
 (
 	user_id int NOT NULL,
 	podcast_id int NOT NULL,
+	color varchar(20) NOT NULL,
 	CONSTRAINT pk_user_podcast PRIMARY KEY (user_id, podcast_id),
 	CONSTRAINT fk_user_podcast_user FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT fk_user_podcast_podcast FOREIGN KEY (podcast_id) REFERENCES podcasts (podcast_id)

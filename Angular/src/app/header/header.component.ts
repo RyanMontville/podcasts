@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
   user: User = new User(0,'');
   showComponents: {login: boolean, register: boolean} = {login: false, register: false};
   @Input() set podcast(value: Link){
-    this.backgroundColor = value.color;
+    /************************************Fix this***************************************************************************************************** */
+    this.backgroundColor = 'red';
   }
 
   constructor(private userService: UserService) {}

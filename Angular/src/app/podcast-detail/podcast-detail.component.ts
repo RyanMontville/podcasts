@@ -11,7 +11,7 @@ import { Link } from '../Link.model';
   styleUrls: ['./podcast-detail.component.css']
 })
 export class PodcastDetailComponent implements OnInit {
-  podcast: Link = {podcastId: 0, url: '', title: '', color: '', image: ''};
+  podcast: Link = {podcastId: 0, podcastUrl: '', podcastTitle: '', podcastImage: ''};
   podcastId: number = 0;
   podcastImage: string = "";
   podcastTitle: string = "";
@@ -27,9 +27,9 @@ export class PodcastDetailComponent implements OnInit {
       let titlestr: string = params['id'];
       let title: string = titlestr.replace(/-/g, ' ');
       this.podcast = this.podcastService.getPodcast(title);
-      this.podcastImage = this.podcast.image;
-      this.podcastTitle = this.podcast.title;
-      this.getPodcast(this.podcast.url);
+      this.podcastImage = this.podcast.podcastImage;
+      this.podcastTitle = this.podcast.podcastTitle;
+      this.getPodcast(this.podcast.podcastUrl);
     })
     
   }

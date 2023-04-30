@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit{
   podcasts: Link[] = [];
   username: string = "Ryan";
   isLoggedIn: boolean = false;
+  podcastStringified: string = "";
 
   constructor(
     private podcastService: PodcastService, 
@@ -31,6 +32,12 @@ export class HomeComponent implements OnInit{
   viewPodcast(title: string) {
     let str = title.replace(/\s+/g, '-').toLowerCase();
     this.router.navigate([`/podcast/${str}`]);
+  }
+
+  getAll() {
+    let allPodcasts = this.podcastService.getAllPodcasts();
+    this.podcasts = allPodcasts;
+    this.podcastStringified = JSON.stringify(allPodcasts);
   }
 
 }

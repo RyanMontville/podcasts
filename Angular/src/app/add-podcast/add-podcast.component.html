@@ -15,12 +15,5 @@
         </span></button>
   </div>
 </form>
-  <section id="result" *ngIf="podcastUrl !=''">
-    <hr />
-
-    <span *ngIf="podcastTitle == '' && status == ''">Searching...</span>
-    <span *ngIf="status == 'error'">Podcast not found.</span>
-  </section>
-  {{podcastTitle}}
-  <br/>{{podcastImage}}
+{{statusMessage.message}}
 </main>

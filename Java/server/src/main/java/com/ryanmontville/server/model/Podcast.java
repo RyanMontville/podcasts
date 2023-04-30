@@ -2,10 +2,11 @@ package com.ryanmontville.server.model;
 
 public class Podcast {
     private int podcastId;
+    private int userId;
     private String podcastUrl;
     private String podcastTitle;
-    private String color;
-    private String image;
+    private String podcastImage;
+    private String podcastColor;
 
     public Podcast() {}
 
@@ -15,6 +16,14 @@ public class Podcast {
 
     public void setPodcastId(int podcastId) {
         this.podcastId = podcastId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getPodcastUrl() {
@@ -33,19 +42,21 @@ public class Podcast {
         this.podcastTitle = podcastTitle;
     }
 
-    public String getColor() {
-        return color;
+    public String getPodcastImage() {
+        return podcastImage;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setPodcastImage(String image) {
+        this.podcastImage = image;
     }
 
-    public String getImage() {
-        return image;
+    public String getPodcastColor() {
+        return podcastColor;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPodcastColor(String color) {
+        this.podcastColor = color;
     }
 }
+
+

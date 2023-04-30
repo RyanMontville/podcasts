@@ -27,7 +27,6 @@ export class UserService {
             this.isSignedIn.next(true);
             this.errorMessage.next('');
         }, error => {
-            //this.errorMessage.next(error.error.message);
             this.errorMessage.next(error.error.message);
         });
     }

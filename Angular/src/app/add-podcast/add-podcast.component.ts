@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Podcast } from '../Podcast.model';
 import { PodcastService } from '../podcast.service';
 import { Router } from '@angular/router';
 
@@ -10,36 +8,31 @@ import { Router } from '@angular/router';
   templateUrl: './add-podcast.component.html',
   styleUrls: ['./add-podcast.component.css']
 })
-export class AddPodcastComponent {
+export class AddPodcastComponent implements OnInit {
   podcastUrl: string = "";
   podcastTitle: string = "";
-  podcastColor: string = "";
-  podcastImage: string = "";
-  podcastHost: string = "";
-  status: string = "";
+  statusMessage: {message: string, color: string} = {message: '', color: ''};
 
-  constructor(private http: HttpClient, private podcastService: PodcastService, private router: Router) {}
-
-  getPodcast(podcast: string) {
-    this.http.get<Podcast>(`https://api.rss2json.com/v1/api.json?rss_url=${podcast}&api_key=oknfgwjsm1rg6qymitppclwvg60z4ml7at0g1be1`)
-    .subscribe(data => {
-      if(data.status === 'error') {
-        this.status = data.status;
-      } else {
-        this.podcastImage = data.feed.image;
-        this.podcastTitle = data.feed.title;
-        this.podcastHost = data.feed.author;
-        this.podcastService.addPodcast({podcastId: 0, url: podcast, title: data.feed.title, color: 'black', image: data.feed.image});
-        //this.router.navigate(['/']);
+  constructor(private podcastService: PodcastService, private router: Router) {}
+  ngOnInit() {
+    this.podcastService.errorMessage.subscribe(error => {
+      this.statusMessage = {message: error, color: 'alert-danger'};
+    });
+    this.podcastService.newestPodcastTitle.subscribe(title => {
+      this.podcastTitle = title;
+      if(title.length>0) {
+        this.statusMessage = {message: `${title} has been added to database.`, color: 'alert-success'};
+        setTimeout(() => {
+          this.podcastService.newestPodcastTitle.next('');
+          this.router.navigate(['/']);
+        }, 2000)
       }
-    }, error => {
-      this.status = 'error';
-});
+    })
   }
 
   onSubmit(f: NgForm) {
     this.podcastUrl = f.value.podcastUrl;
-    this.status = '';
-    this.getPodcast(f.value.podcastUrl);
+    this.podcastService.addPodcast(f.value.podcastUrl);
+    this.statusMessage = {message: `Searching for ${f.value.podcastUrl}`, color: 'alert-warning'};
   }
 }
