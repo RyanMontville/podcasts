@@ -11,7 +11,9 @@ import { Link } from '../Link.model';
   styleUrls: ['./podcast-detail.component.css']
 })
 export class PodcastDetailComponent implements OnInit {
-  podcast: Link = {podcastId: 0, podcastUrl: '', podcastTitle: '', podcastImage: ''};
+  podcast: Podcast = new Podcast();
+  link: Link = new Link(0,'','','','');
+  linkStringified: string = '';
   podcastId: number = 0;
   podcastImage: string = "";
   podcastTitle: string = "";
@@ -19,29 +21,28 @@ export class PodcastDetailComponent implements OnInit {
   hostLink: string = "";
   description: string = "";
   feedItems: Item[] = [];
+  url: string = '';
+  urlSubject: string = '';
+  errorMessage: string = '';
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private podcastService: PodcastService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      let titlestr: string = params['id'];
-      let title: string = titlestr.replace(/-/g, ' ');
-      this.podcast = this.podcastService.getPodcast(title);
-      this.podcastImage = this.podcast.podcastImage;
-      this.podcastTitle = this.podcast.podcastTitle;
-      this.getPodcast(this.podcast.podcastUrl);
-    })
+      let paramString: string = params['id'];
+      this.podcastService.getUrl(paramString);
+      this.podcastService.currentUrl.subscribe(data => {
+        this.urlSubject = data;
+        this.linkStringified = JSON.stringify(this.podcastService.getPodcast(data))
+      });
+      this.podcastService.errorMessage.subscribe(data => {
+        this.errorMessage = data;
+      });
+      this.podcastService.currentPodcast.subscribe(data => {
+        this.podcast = data;
+      })
+    });
     
-  }
-  getPodcast(podcast: string) {
-    this.http.get<Podcast>(`https://api.rss2json.com/v1/api.json?rss_url=${podcast}&api_key=oknfgwjsm1rg6qymitppclwvg60z4ml7at0g1be1`).subscribe(data => {
-      this.podcastImage = data.feed.image;
-      this.podcastHost = data.feed.author;
-      this.podcastTitle = data.feed.title;
-      this.description = data.feed.description;
-      this.hostLink = data.feed.link;
-      this.feedItems = data.items;
-    })
   }
 
   formatDate(date: string) {

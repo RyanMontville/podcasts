@@ -6,8 +6,9 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE podcasts
 (
 	podcast_id serial NOT NULL,
+	param_string text NOT NULL,
 	podcast_url text NOT NULL,
-	podcast_title varchar(50) NOT NULL,
+	podcast_title text NOT NULL,
 	podcast_image text NOT NULL,
 	CONSTRAINT pk_podcasts PRIMARY KEY (podcast_id)
 );

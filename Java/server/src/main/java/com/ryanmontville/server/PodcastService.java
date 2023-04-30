@@ -47,6 +47,10 @@ public class PodcastService {
         JSONObject feed = obj.getJSONObject("feed");
         podcast.setPodcastId(0);
         podcast.setPodcastUrl(podcastUrl);
+        String title = feed.getString("title");
+        String titleLetters = title.replaceAll("[^a-zA-Z0-9\\s]", "");
+        String paramString = titleLetters.replace(' ', '-');
+        podcast.setParamString(paramString.toLowerCase());
         podcast.setPodcastTitle(feed.getString("title"));
         podcast.setPodcastImage((feed.getString("image")));
 

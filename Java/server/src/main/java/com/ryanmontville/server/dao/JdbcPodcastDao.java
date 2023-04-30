@@ -17,7 +17,7 @@ public class JdbcPodcastDao implements PodcastDao {
     @Override
     public List<Podcast> getAllPodcasts() {
         List<Podcast> podcasts = new ArrayList<>();
-        String sql = "SELECT podcast_id, podcast_url, podcast_title, podcast_image FROM public.podcasts ORDER BY podcast_title ASC;";
+        String sql = "SELECT podcast_id, param_string, podcast_url, podcast_title, podcast_image FROM public.podcasts ORDER BY podcast_title ASC;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()){
             podcasts.add(mapRowToPodcast(results));
@@ -28,7 +28,7 @@ public class JdbcPodcastDao implements PodcastDao {
     @Override
     public Podcast getPodcastById(int podcastId) {
         Podcast podcast = null;
-        String sql = "SELECT podcast_id, podcast_url, podcast_title, podcast_image FROM public.podcasts WHERE podcast_id=?";
+        String sql = "SELECT podcast_id, param_string, podcast_url, podcast_title, podcast_image FROM public.podcasts WHERE podcast_id=?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql,podcastId);
         if(result.next()){
             podcast = mapRowToPodcast(result);
@@ -39,7 +39,7 @@ public class JdbcPodcastDao implements PodcastDao {
     @Override
     public Podcast getPodcastByTitle(String podcastTitle) {
         Podcast podcast = null;
-        String sql = "SELECT podcast_id, podcast_url, podcast_title, podcast_image FROM public.podcasts WHERE podcast_title=?";
+        String sql = "SELECT podcast_id, param_string, podcast_url, podcast_title, podcast_image FROM public.podcasts WHERE podcast_title=?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql,podcastTitle);
         if(result.next()){
             podcast = mapRowToPodcast(result);
@@ -50,7 +50,7 @@ public class JdbcPodcastDao implements PodcastDao {
     @Override
     public Podcast getPodcastByUrl(String podcastUrl) {
         Podcast podcast = null;
-        String sql = "SELECT podcast_id, podcast_url, podcast_title, podcast_image FROM public.podcasts WHERE podcast_url=?";
+        String sql = "SELECT podcast_id, param_string, podcast_url, podcast_title, podcast_image FROM public.podcasts WHERE podcast_url=?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql,podcastUrl);
         if(result.next()){
             podcast = mapRowToPodcast(result);
@@ -59,15 +59,27 @@ public class JdbcPodcastDao implements PodcastDao {
     }
 
     @Override
+    public String getPocastUrlFromTitle(String podcastTitle) {
+        String podcastUrl = null;
+        String sql = "SELECT podcast_url FROM public.podcasts WHERE param_string=?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql,podcastTitle);
+        if(result.next()){
+            podcastUrl = result.getString("podcast_url");
+        }
+        return podcastUrl;
+    }
+
+    @Override
     public int addNewPodcast(Podcast newPodcast) {
-        String sql = "INSERT INTO public.podcasts(podcast_url, podcast_title, podcast_image) VALUES (?, ?, ?) RETURNING podcast_id;";
-        Integer podcastId = jdbcTemplate.queryForObject(sql,Integer.class,newPodcast.getPodcastUrl(),newPodcast.getPodcastTitle(),newPodcast.getPodcastImage());
+        String sql = "INSERT INTO public.podcasts(param_string, podcast_url, podcast_title, podcast_image) VALUES (?, ?, ?, ?) RETURNING podcast_id;";
+        Integer podcastId = jdbcTemplate.queryForObject(sql,Integer.class,newPodcast.getParamString(),newPodcast.getPodcastUrl(),newPodcast.getPodcastTitle(),newPodcast.getPodcastImage());
         return podcastId;
     }
 
     private Podcast mapRowToPodcast(SqlRowSet rowSet) {
         Podcast podcast = new Podcast();
         podcast.setPodcastId(rowSet.getInt("podcast_id"));
+        podcast.setParamString(rowSet.getString("param_string"));
         podcast.setUserId(0);
         podcast.setPodcastUrl(rowSet.getString("podcast_url"));
         podcast.setPodcastTitle(rowSet.getString("podcast_title"));

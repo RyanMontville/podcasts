@@ -1,17 +1,17 @@
-<app-header [podcast]="podcast" />
+<app-header [podcast]="link" />
 <section id="podcast-header">
     <section id="feed-info">
-      <img [src]="podcastImage" [alt]="podcastTitle" *ngIf="podcastImage !==''" class="logo">
+      <img [src]="podcast.feed.image" [alt]="podcast.feed.title" *ngIf="podcast.feed.image !==''" class="logo">
       <section id="author">
-        <h2 [innerHTML]="podcastTitle"></h2>
-        <h3><a [href]="hostLink" target="_blank" rel="noopener noreferrer"
-            title="{{podcastTitle}} website" [innerHTML]="podcastHost"></a></h3>
+        <h2 [innerHTML]="podcast.feed.title"></h2>
+        <h3><a [href]="podcast.feed.link" target="_blank" rel="noopener noreferrer"
+            title="{{podcast.feed.title}} website" [innerHTML]="podcast.feed.author"></a></h3>
       </section>
     </section>
-    <p [innerHTML]="description" id="description"></p>
+    <p [innerHTML]="podcast.feed.description" id="description"></p>
   </section>
-  <article *ngIf="!hostLink">Loading...</article>
-  <article *ngFor="let item of feedItems">
+  <article *ngIf="!podcast.feed.link">Loading...</article>
+  <article *ngFor="let item of podcast.items">
     <h4>{{item.title}}</h4>
     <h4>{{formatDate(item.pubDate)}}</h4>
     <p [innerHTML]="item.description"></p>

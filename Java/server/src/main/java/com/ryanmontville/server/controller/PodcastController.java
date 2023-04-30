@@ -37,6 +37,16 @@ public class PodcastController {
         }
     }
 
+    @RequestMapping(path = "/podUrl/{paramString}", method = RequestMethod.GET)
+    public String getUrlFromParam(@PathVariable String paramString) {
+        String url = podcastDao.getPocastUrlFromTitle(paramString);
+        if(url == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Podcast not found.");
+        } else {
+            return url;
+        }
+    }
+
     /*************************************** POST **************************************/
     @RequestMapping(path = "/podcasts", method = RequestMethod.POST)
     public Podcast addNewPodcast(@RequestBody String podcastUrl) throws Exception {

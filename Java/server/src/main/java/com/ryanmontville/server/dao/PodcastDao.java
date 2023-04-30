@@ -9,6 +9,7 @@ public interface PodcastDao {
     Podcast getPodcastById(int podcastId);
     Podcast getPodcastByTitle(String podcastTitle);
     Podcast getPodcastByUrl(String podcastUrl);
+    String getPocastUrlFromTitle(String podcastTitle);
     int addNewPodcast(Podcast newPodcast);
 
 }

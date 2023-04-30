@@ -3,10 +3,19 @@ package com.ryanmontville.server.model;
 public class Podcast {
     private int podcastId;
     private int userId;
+    private String paramString;
     private String podcastUrl;
     private String podcastTitle;
     private String podcastImage;
     private String podcastColor;
+
+    public String getParamString() {
+        return paramString;
+    }
+
+    public void setParamString(String paramString) {
+        this.paramString = paramString;
+    }
 
     public Podcast() {}
 

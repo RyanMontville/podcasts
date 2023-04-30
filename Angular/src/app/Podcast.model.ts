@@ -1,5 +1,25 @@
 export class Podcast {
-    constructor(public status: string, public feed: Feed, public items: Item[]) {}
+    public status: string;
+    public feed: Feed;
+    public items: Item[];
+
+    constructor() {
+        this.status = '';
+        this.feed = new Feed('','','','','','');
+        this.items = [];
+    }
+
+    public setStatus(status: string) {
+        this.status = status;
+    }
+
+    public setFeed(feed: Feed) {
+        this.feed = feed;
+    }
+
+    public setItems(items: Item[]) {
+        this.items = items;
+    }
 }
 
 export class Feed {
