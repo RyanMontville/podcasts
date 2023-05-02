@@ -13,21 +13,22 @@ body {
 
 /******************** colors ************************/
 .super-light-yellow { background-color: #f3f1e2; color:black;}
-.red { background-color: #ff0000; color: #fff; }
+.red { background-color: #e92f30; color: #fff; }
 .orange { background-color: #ff6f00; color: #000; }
-.yellow { background-color: yellow; color: black; }
+.yellow { background-color: #ffc000; color: black; }
 .green { background-color: #2e712a; color: #fff; }
 .blue { background-color: rgba(49,55,253,1); color: #fff; }
 .purple { background-color: #651fff; color: #fff; }
-.pink { background-color: #f96995; color: #000; }
+.dark-purple { background-color: #0c5671; color: white;}
+.pink { background-color: #ff4668; color: #fff; }
 .white {background-color: white; color: black; }
 .black { background-color: black; color: white; }
 .grey { background-color: grey; color: white; }
 
-.super-light-yellow a, .orange a, .white a, .pink a {
+.super-light-yellow a, .orange a, .white a {
     color: black;
 }
-.red a, .green a, .blue a, .purple a, .black a, .grey a {
+.red a, .green a, .blue a, .purple a, .black a, .grey a, .dark-purple a, .pink a {
     color: white;
 }
 

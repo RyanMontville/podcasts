@@ -6,4 +6,66 @@ article {
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     position: relative;
+    z-index: 1;
 }
+
+#color-selection {
+    display: flex;
+    justify-content: space-around;
+}
+
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
+}
+
+.btn {
+    background: rgb(66, 133, 244);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 2rem;
+    position: relative;
+    overflow: hidden;
+    margin: 10px auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    width: 5rem;
+    height: 5rem;
+    background: rgba(255, 255, 255, 0.5);
+    transform-origin: center left;
+    transform: scale(0) translateX(-50%);
+    border-radius: 50%;
+  }
+  
+  .btn:hover::after {
+    animation: expand 1s ease;
+  }
+
+  .btn i {
+    font-size: 2rem;
+  }
+  
+  @keyframes expand {
+    100% {
+      opacity: 0;
+      transform: scale(4) translateX(-50%);
+    }
+  }

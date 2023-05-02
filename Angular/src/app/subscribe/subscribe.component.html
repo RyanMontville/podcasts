@@ -1,4 +1,25 @@
 <app-header [color]="color" />
-<article>
-    {{unsubbed.length}}
+<article *ngIf="chosenId===0">
+    <h2>Podcasts users have added</h2>
+    <ul>
+        <li *ngFor="let podcast of unsubbed">
+            <a [innerHTML]="podcast.podcastTitle"
+            (click)="handlePodcastSelection(podcast)"></a>
+        </li>
+    </ul>
+    <h3>Don't see the podcast you are looking for?</h3>
+    <button class="btn" routerLink="/add"><i class="material-symbols-outlined">add_link</i> Add it here</button>
+</article>
+<article *ngIf="chosenId!==0">
+    <h2>Choose a podcast to subscribe</h2>
+    <p>{{chosenTitle}}</p>
+    <hr />
+    <h2>Choose a color for {{chosenTitle}}: </h2>
+    <section id="color-selection">
+        <span 
+            class="color-circle" 
+            *ngFor="let color of colors" 
+            [class]="color"
+            (click)="handleColorSelection(color)"></span>
+    </section>
 </article>

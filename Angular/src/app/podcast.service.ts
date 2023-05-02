@@ -3,11 +3,12 @@ import { Link } from "./Link.model";
 import { Podcast } from "./Podcast.model";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Subject } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class PodcastService {
     private podcasts: Link[] = [];
-    public unsubbed = new Subject<{id:number,title:string}[]>();
+    public unsubbed = new Subject<{podcastId:number,podcastTitle:string}[]>();
     public errorMessage = new BehaviorSubject<string>('');
     public newestPodcastTitle = new BehaviorSubject<string>('');
     public currentUrl = new Subject<string>();
@@ -15,7 +16,9 @@ export class PodcastService {
     public podcastsListChanged = new Subject<Link[]>();
     public podcastColor = new Subject<string>();
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private router: Router) { }
 
     getAllPodcasts() {
         this.http.get<Link[]>('http://localhost:9000/podcasts').subscribe(data => {
@@ -30,7 +33,7 @@ export class PodcastService {
     }
 
     getUnsubbedForUser(userId: number) {
-        this.http.get<{id:number,title:string}[]>(`http://localhost:9000/NotSubscribed/${userId}`).subscribe(data => {
+        this.http.get<{podcastId:number,podcastTitle:string}[]>(`http://localhost:9000/NotSubscribed/${userId}`).subscribe(data => {
             this.unsubbed.next(data);
         })
     }
@@ -68,5 +71,16 @@ export class PodcastService {
         }, error => {
             this.errorMessage.next(error.error.message);
         });
+    }
+
+    subscribeToPodcast(userId: number, podcastId: number, color: string) {
+        let hasSubscribed: boolean = false;
+        this.http.post<boolean>('http://localhost:9000/subscribe',{userId: userId, podcastId: podcastId, podcastColor: color}).subscribe(data => {
+            if(data) {
+                this.router.navigate(['']);
+            }
+        });
+
+        return hasSubscribed;
     }
 }

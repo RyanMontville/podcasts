@@ -4,6 +4,7 @@ nav {
     padding: 10px;
     font-family: 'Roboto';
     font-size: 20px;
+    z-index: 1;
 }
 
 nav a {
