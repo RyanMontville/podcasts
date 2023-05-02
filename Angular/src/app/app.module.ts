@@ -13,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { UserService } from './user.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { RegisterComponent } from './register/register.component';
     AddPodcastComponent,
     HeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SubscriptionDetailComponent,
+    SubscribeComponent
   ],
   imports: [
     BrowserModule,

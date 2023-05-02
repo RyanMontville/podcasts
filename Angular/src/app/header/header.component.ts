@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Link } from '../Link.model';
 import { UserService } from '../user.service';
 import { User } from '../User.model';
+import { Router } from '@angular/router';
+import { PodcastService } from '../podcast.service';
 
 @Component({
   selector: 'app-header',
@@ -9,24 +10,17 @@ import { User } from '../User.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  backgroundColor: string = "";
-  color: string = "";
   isLoggedIn: boolean = false;
   user: User = new User(0,'');
   showComponents: {login: boolean, register: boolean} = {login: false, register: false};
-  @Input() set podcast(value: Link){
-    /************************************Fix this***************************************************************************************************** */
-    this.backgroundColor = 'red';
-  }
+  @Input() color: string = 'white';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router) {}
   ngOnInit() {
-    this.userService.isSignedIn.subscribe(isSignedIn => {
-      this.isLoggedIn = isSignedIn;
-    });
-    this.userService.user.subscribe(user => {
-      this.user = user;
-    })
+    this.userService.isSignedIn.subscribe(isSignedIn => { this.isLoggedIn = isSignedIn; });
+    this.userService.user.subscribe(user => { this.user = user; });
   }
 
   login() {
@@ -47,6 +41,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+    this.router.navigate(['']);
   }
 
 }

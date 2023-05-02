@@ -1,4 +1,4 @@
-<nav>
+<nav [class]="color">
     <a routerLink="/">Home</a>
     <span *ngIf="isLoggedIn==false">
       <a (click)="login()">Login</a> | <a (click)="register()">Register</a>

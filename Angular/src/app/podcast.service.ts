@@ -7,22 +7,15 @@ import { BehaviorSubject, Subject } from "rxjs";
 @Injectable()
 export class PodcastService {
     private podcasts: Link[] = [];
+    public unsubbed = new Subject<{id:number,title:string}[]>();
     public errorMessage = new BehaviorSubject<string>('');
     public newestPodcastTitle = new BehaviorSubject<string>('');
     public currentUrl = new Subject<string>();
     public currentPodcast = new Subject<Podcast>();
     public podcastsListChanged = new Subject<Link[]>();
+    public podcastColor = new Subject<string>();
 
     constructor(private http: HttpClient) { }
-
-    addPodcast(podcastUrl: string) {
-        this.http.post<Link>('http://localhost:9000/podcasts', podcastUrl).subscribe(data => {
-            this.newestPodcastTitle.next(data.podcastTitle);
-            this.getAllPodcasts();
-        }, error => {
-            this.errorMessage.next(error.error.message);
-        });
-    }
 
     getAllPodcasts() {
         this.http.get<Link[]>('http://localhost:9000/podcasts').subscribe(data => {
@@ -30,12 +23,16 @@ export class PodcastService {
         });
     }
 
-    getUrl(paramString: string) {
-        this.http.get(`http://localhost:9000/podUrl/${paramString}`,{responseType: 'text'}).subscribe(string => {
-            this.currentUrl.next(string);
-        }, error => {
-            this.errorMessage.next(JSON.stringify(error));
-        });
+    getPodcastsForUser(userId: number) {
+        this.http.get<Link[]>(`http://localhost:9000/subscriptions/${userId}`).subscribe(data => {
+            this.podcastsListChanged.next(data);
+        })
+    }
+
+    getUnsubbedForUser(userId: number) {
+        this.http.get<{id:number,title:string}[]>(`http://localhost:9000/NotSubscribed/${userId}`).subscribe(data => {
+            this.unsubbed.next(data);
+        })
     }
 
     getPodcast(podcastUrl: string) {
@@ -47,5 +44,29 @@ export class PodcastService {
             return podcast;
     }
 
+    getUrl(paramString: string) {
+        this.http.get(`http://localhost:9000/podUrl/${paramString}`,{responseType: 'text'}).subscribe(string => {
+            this.currentUrl.next(string);
+        }, error => {
+            this.errorMessage.next(JSON.stringify(error));
+        });
+    }
 
+    getUrlAnColor(userId: number, paramString: string) {
+        this.http.get<Link>(`http://localhost:9000/subscriptions/${userId}/${paramString}`).subscribe(data =>{
+            this.currentUrl.next(data.podcastUrl);
+            this.podcastColor.next(data.podcastColor);
+        }, error => {
+            this.errorMessage.next(JSON.stringify(error));
+        });
+    }
+
+    addPodcast(podcastUrl: string) {
+        this.http.post<Link>('http://localhost:9000/podcasts', podcastUrl).subscribe(data => {
+            this.newestPodcastTitle.next(data.podcastTitle);
+            this.getAllPodcasts();
+        }, error => {
+            this.errorMessage.next(error.error.message);
+        });
+    }
 }

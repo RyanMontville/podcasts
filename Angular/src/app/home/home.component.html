@@ -1,19 +1,24 @@
-<app-header />
+<app-header [color]="color" />
 <main>
   <section id="subcription-header">
     <h3 *ngIf="!isLoggedIn">Podcasts users are listening to</h3>
     <h3 *ngIf="isLoggedIn">Your Subscriptions</h3>
     <button 
-    class="btn" 
-    routerLink="/add"
+    class="btn add" 
+    routerLink="/subscribe"
     title="Add Podcast" 
     *ngIf="isLoggedIn">
-      <span class="material-symbols-outlined">add_link</span>
+    <span class="material-symbols-outlined">add</span>
     </button>
   </section>
-  <section id="subcription-list">
+  <section id="subcription-list" *ngIf="!isLoggedIn">
     <div *ngFor="let podcast of podcasts">
         <a (click)="viewPodcast(podcast.paramString)" class="podcast-link"><img [src]="podcast.podcastImage" [alt]="podcast.podcastTitle" class="logo"></a>
+      </div>
+  </section>
+  <section id="subcription-list" *ngIf="isLoggedIn">
+    <div *ngFor="let podcast of podcasts">
+        <a (click)="viewSubscription(podcast.paramString)" class="podcast-link"><img [src]="podcast.podcastImage" [alt]="podcast.podcastTitle" class="logo"></a>
       </div>
   </section>
 </main>

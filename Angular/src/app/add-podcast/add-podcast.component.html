@@ -1,6 +1,11 @@
-<app-header />
+<app-header [color]="color" />
 <main>
   <p>Please find the rss feed for the podcast. Usually you can google search "(podcast name) rss".</p>
+  <div [class]="statusMessage.color" *ngIf="statusMessage.message.length>0">
+    <i class="material-symbols-outlined" *ngIf="statusMessage.color == 'alert alert-danger'">error</i> 
+    <i class="material-symbols-outlined" *ngIf="statusMessage.color == 'alert alert-warning'"> search</i> 
+    <i class="material-symbols-outlined" *ngIf="statusMessage.color == 'alert alert-success'"> done</i> 
+    {{statusMessage.message}}</div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
   <div class="material-textfield">
     <input 
@@ -15,5 +20,4 @@
         </span></button>
   </div>
 </form>
-{{statusMessage.message}}
 </main>

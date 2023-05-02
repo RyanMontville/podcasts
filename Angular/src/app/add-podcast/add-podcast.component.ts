@@ -11,17 +11,18 @@ import { Router } from '@angular/router';
 export class AddPodcastComponent implements OnInit {
   podcastUrl: string = "";
   podcastTitle: string = "";
-  statusMessage: {message: string, color: string} = {message: '', color: ''};
+  statusMessage: { message: string, color: string } = { message: '', color: '' };
+  color: string = 'white';
 
-  constructor(private podcastService: PodcastService, private router: Router) {}
+  constructor(private podcastService: PodcastService, private router: Router) { }
   ngOnInit() {
     this.podcastService.errorMessage.subscribe(error => {
-      this.statusMessage = {message: error, color: 'alert-danger'};
+      this.statusMessage = { message: error, color: 'alert alert-danger' };
     });
     this.podcastService.newestPodcastTitle.subscribe(title => {
       this.podcastTitle = title;
-      if(title.length>0) {
-        this.statusMessage = {message: `${title} has been added to database.`, color: 'alert-success'};
+      if (title.length > 0) {
+        this.statusMessage = { message: `${title} has been added to database.`, color: 'alert alert-success' };
         setTimeout(() => {
           this.podcastService.newestPodcastTitle.next('');
           this.router.navigate(['/']);
@@ -31,8 +32,12 @@ export class AddPodcastComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    this.podcastUrl = f.value.podcastUrl;
-    this.podcastService.addPodcast(f.value.podcastUrl);
-    this.statusMessage = {message: `Searching for ${f.value.podcastUrl}`, color: 'alert-warning'};
+    if (f.value.podcastUrl.length === 0) {
+      this.statusMessage = { message: 'Please enter a url.', color: 'alert alert-danger' }
+    } else {
+      this.podcastUrl = f.value.podcastUrl;
+      this.podcastService.addPodcast(f.value.podcastUrl);
+      this.statusMessage = { message: `Searching for ${f.value.podcastUrl}`, color: 'alert alert-warning' };
+    }
   }
 }

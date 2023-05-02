@@ -4,5 +4,6 @@ export class Link {
         public paramString: string,
         public podcastUrl: string, 
         public podcastTitle: string, 
-        public podcastImage: string) {}
+        public podcastImage: string,
+        public podcastColor: string) {}
 }

@@ -1,6 +1,7 @@
 package com.ryanmontville.server.controller;
 
 import com.ryanmontville.server.dao.JdbcUserDao;
+import com.ryanmontville.server.model.Podcast;
 import com.ryanmontville.server.model.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,7 @@ public class UserController {
             return user;
         }
     }
+
     /*************************************** POST **************************************/
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users", method = RequestMethod.POST)

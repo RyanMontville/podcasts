@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit{
   podcasts: Link[] = [];
   username: string = "Ryan";
   isLoggedIn: boolean = false;
+  color: string = 'white';
 
   constructor(
     private podcastService: PodcastService, 
@@ -22,17 +23,26 @@ export class HomeComponent implements OnInit{
     private userService: UserService) {}
 
   ngOnInit() {
-    this.podcastService.getAllPodcasts();
     this.podcastService.podcastsListChanged.subscribe((podcastsList: Link[]) => {
       this.podcasts = podcastsList;
-    })
+    });
     this.userService.isSignedIn.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
+      if(loggedIn) {
+        let userId = this.userService.getUserId();
+        this.podcastService.getPodcastsForUser(userId);
+      } else {
+        this.podcastService.getAllPodcasts();
+      }
     });
   }
 
   viewPodcast(title: string) {
     this.router.navigate([`/podcast/${title}`]);
+  }
+
+  viewSubscription(title: string) {
+    this.router.navigate([`/subscription/${title}`]);
   }
 
   getAll() {
