@@ -1,12 +1,11 @@
 <app-header [color]="color" />
 <article *ngIf="chosenId===0">
     <h2>Podcasts users have added</h2>
-    <ul>
-        <li *ngFor="let podcast of unsubbed">
-            <a [innerHTML]="podcast.podcastTitle"
-            (click)="handlePodcastSelection(podcast)"></a>
-        </li>
-    </ul>
+    <div *ngFor="let podcast of unsubbed">
+        <a [innerHTML]="podcast.podcastTitle"
+            (click)="handlePodcastSelection(podcast)"
+            class="sub-link"></a>
+    </div>
     <h3>Don't see the podcast you are looking for?</h3>
     <button class="btn" routerLink="/add"><i class="material-symbols-outlined">add_link</i> Add it here</button>
 </article>

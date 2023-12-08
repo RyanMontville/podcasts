@@ -15,6 +15,7 @@ export class PodcastService {
     public currentPodcast = new Subject<Podcast>();
     public podcastsListChanged = new Subject<Link[]>();
     public podcastColor = new Subject<string>();
+    public podcastId = new Subject<number>();
 
     constructor(
         private http: HttpClient,
@@ -68,6 +69,7 @@ export class PodcastService {
         this.http.post<Link>('http://localhost:9000/podcasts', podcastUrl).subscribe(data => {
             this.newestPodcastTitle.next(data.podcastTitle);
             this.getAllPodcasts();
+            this.podcastId.next(data.podcastId);
         }, error => {
             this.errorMessage.next(error.error.message);
         });

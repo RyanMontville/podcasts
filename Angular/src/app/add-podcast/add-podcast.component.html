@@ -20,4 +20,14 @@
         </span></button>
   </div>
 </form>
+<div *ngIf="chosenId != 0">
+  <h2>Choose a color for {{podcastTitle}}: </h2>
+    <section id="color-selection">
+        <span 
+            class="color-circle" 
+            *ngFor="let color of colors" 
+            [class]="color"
+            (click)="handleColorSelection(color)"></span>
+    </section>
+</div>
 </main>

@@ -69,3 +69,11 @@ h3 {
       transform: scale(4) translateX(-50%);
     }
   }
+
+  .sub-link {
+    cursor: pointer;
+  }
+
+  .sub-link:hover {
+    text-decoration: underline;
+  }

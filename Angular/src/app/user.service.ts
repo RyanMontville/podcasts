@@ -30,6 +30,7 @@ export class UserService {
     register(username: string) {
         this.http.post<User>('http://localhost:9000/users',username).subscribe(data => {
             this.user.next(data);
+            this.userId = data.userId;
             this.isSignedIn.next(true);
             this.errorMessage.next('');
         }, error => {
